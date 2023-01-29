@@ -1,6 +1,6 @@
-const { assert } = require("chai");
+const { assert, expect } = require("chai");
 
-const { users, seedUsers } = require("../db");
+const { users, seedUsers, addUserToDb } = require("../db");
 
 describe("db", () => {
   describe("users", () => {
@@ -70,6 +70,43 @@ describe("db", () => {
         const match = pwd.match(pwdRegExp);
         assert.isTrue(match !== null);
       });
+    });
+
+    it("adding a user generates a unique id", () => {
+      const user = {
+        name: "John Doe",
+        email: "abc@email.com",
+        password: "DRPRT+uD@q?02",
+        birthday: "1990-01-01",
+        phone: "+1(123)456-7890",
+        gender: "male",
+      };
+
+      const userAdded = addUserToDb(user);
+      
+      // check that the user was added
+      assert.equal(userAdded, user);
+      // check that the id was generated
+      assert.property(userAdded, "id");
+      // check that the id is unique
+      const ids = users.map((user) => user.id);
+      assert.equal(new Set(ids).size, ids.length);
+
+    });
+
+    it('returns null if user email already exists', () => {
+      const email = "testing@123.com"
+      const user = {
+        name: "John Doe",
+        email: email,
+        password: "DRPRT+uD@q?02",
+        birthday: "1990-01-01",
+        phone: "+1(123)456-7890",
+        gender: "male",
+      };
+      const userAdded = addUserToDb(user);
+      assert.equal(userAdded, user);
+      assert.isNull(addUserToDb(user));    
     });
   });
 });

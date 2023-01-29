@@ -15,9 +15,33 @@ const words = [
   _getUniqueWords(colors),
 ].flat();
 
-class User {
+const _userIds = new Set();
+const addUserToDb = (user) => {
+  try {
+    const generateNewId = () => {
+      let id = Math.floor(Math.random() * _userIds.size + 1);
+      if (_userIds.has(id)) {
+        return generateNewId();
+      }
+      return id;
+    };
+    if (users.find((u) => u.email === user.email)) {
+      throw new Error("User with this email already exists");
+    }
+    user.id = generateNewId();
+    _userIds.add(user.id);
+    users.push(user);
+    return user;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+class UserGenerator {
   constructor(id) {
     this.id = id;
+    _userIds.add(id);
     this.name = this._generateName();
     this.email = this._generateEmail();
     this.password = this._generatePassword();
@@ -192,7 +216,7 @@ class User {
 const seedUsers = (num = 10) => {
   const users = [];
   for (let i = 0; i < num; i++) {
-    const user = new User(i);
+    const user = new UserGenerator(i);
     users.push(user);
   }
   return users;
@@ -203,4 +227,5 @@ const users = seedUsers(100);
 module.exports = {
   users: users,
   seedUsers: seedUsers,
+  addUserToDb: addUserToDb,
 };
