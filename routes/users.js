@@ -1,9 +1,9 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
-const users = require('../db');
+const users = require("../db");
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
+router.get("/", function (req, res, next) {
   res.send(users);
 });
 

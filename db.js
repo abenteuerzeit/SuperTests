@@ -1,24 +1,19 @@
 const { surnames, maleNames, femaleNames } = require("./_names");
-const { nouns, colors, adjectives } = require("./_words");
-
-const emailDomains = [
-  "gmail.com",
-  "yahoo.com",
-  "hotmail.com",
-  "aol.com",
-  "me.com",
-  "msn.com",
-  "live.com",
-];
-const usernames = [];
-const pwdRegExp = new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})');
-
+const { nouns, colors, adjectives, emailDomains } = require("./_words");
 const genders = ["male", "female"];
+const usernames = [];
+const pwdRegExp = new RegExp(
+  "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})"
+);
 
 const _getUniqueWords = (arr) => {
-    return Array.from(new Set(arr));
-}
-const words = [_getUniqueWords(nouns), _getUniqueWords(adjectives), _getUniqueWords(colors)].flat()
+  return Array.from(new Set(arr));
+};
+const words = [
+  _getUniqueWords(nouns),
+  _getUniqueWords(adjectives),
+  _getUniqueWords(colors),
+].flat();
 
 class User {
   constructor(id) {
@@ -56,11 +51,7 @@ class User {
   }
   _generateUsername() {
     let _username = "";
-    for (
-      let i = 0;
-      i < Math.floor(Math.random() * words.length);
-      i++
-    ) {
+    for (let i = 0; i < Math.floor(Math.random() * words.length); i++) {
       let rollDice = Math.floor(Math.random() * 7);
       switch (rollDice) {
         case 0:
@@ -105,17 +96,29 @@ class User {
             .split(" ")[1][0]
             .toLowerCase()}${Math.floor(Math.random() * 1000)}`;
           break;
-          case 6:
-            // user first and last name is used separated by a dot and random characters or numbers are sometimes added
-            if (Math.floor(Math.random() * 2) === 0 && Math.floor(Math.random() * 2) === 0) {
-              _username = `${this.name.replace(" ", ".").toLowerCase()}`;
-            } else if(Math.floor(Math.random() * 2) === 0 ) {
-                _username = `${this.name.replace(" ", ".").toLowerCase()}${Math.floor(Math.random() * 1000)}`;
-            } else {
-            const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._";
-                _username = `${this.name.replace(" ", ".").toLowerCase()}${chars[Math.floor(Math.random() * chars.length)]}${Math.floor(Math.random() * 1000 % 2 === 0 ? Math.floor(Math.random() * 1000) : "")}`;
-            };
-            break;
+        case 6:
+          // user first and last name is used separated by a dot and random characters or numbers are sometimes added
+          if (
+            Math.floor(Math.random() * 2) === 0 &&
+            Math.floor(Math.random() * 2) === 0
+          ) {
+            _username = `${this.name.replace(" ", ".").toLowerCase()}`;
+          } else if (Math.floor(Math.random() * 2) === 0) {
+            _username = `${this.name
+              .replace(" ", ".")
+              .toLowerCase()}${Math.floor(Math.random() * 1000)}`;
+          } else {
+            const chars =
+              "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._";
+            _username = `${this.name.replace(" ", ".").toLowerCase()}${
+              chars[Math.floor(Math.random() * chars.length)]
+            }${Math.floor(
+              (Math.random() * 1000) % 2 === 0
+                ? Math.floor(Math.random() * 1000)
+                : ""
+            )}`;
+          }
+          break;
         default:
           // user first and last name is used as username
           _username = this.name.replace(" ", "").toLowerCase();
@@ -123,20 +126,20 @@ class User {
       }
     }
     if (usernames.includes(_username) || ["", " ", "."].includes(_username)) {
-        return this._generateUsername();
-        } else {
-        usernames.push(_username);
-        return _username;
-        }
+      return this._generateUsername();
+    } else {
+      usernames.push(_username);
+      return _username;
+    }
   }
   _generatePassword() {
     // make password to match pwdRegExp const above
     let _password = "";
     while (!_password.match(pwdRegExp)) {
       _password = "";
-        for (let i = 0; i < Math.floor(Math.random() * 10) + 8; i++) {
-            _password += String.fromCharCode(Math.floor(Math.random() * 94) + 33);
-        }
+      for (let i = 0; i < Math.floor(Math.random() * 10) + 8; i++) {
+        _password += String.fromCharCode(Math.floor(Math.random() * 94) + 33);
+      }
     }
     return _password;
   }
@@ -186,7 +189,6 @@ class User {
   }
 }
 
-
 const seedUsers = (num = 10) => {
   const users = [];
   for (let i = 0; i < num; i++) {
@@ -199,6 +201,6 @@ const seedUsers = (num = 10) => {
 const users = seedUsers(100);
 
 module.exports = {
-    users: users,
-    seedUsers: seedUsers
-}
+  users: users,
+  seedUsers: seedUsers,
+};

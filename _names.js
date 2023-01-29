@@ -1607,7 +1607,7 @@ const femaleNames = [
 ];
 
 module.exports = {
-    surnames: surnames,
-    femaleNames: femaleNames,
-    maleNames: maleNames,
+  surnames: surnames,
+  femaleNames: femaleNames,
+  maleNames: maleNames,
 };
