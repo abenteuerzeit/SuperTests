@@ -19,9 +19,17 @@ The users database is a simple JSON file located in the `data` folder. It contai
 Every time the server is restarted, the database is regenerated with different users and dummy data.
 
 The users databse is tested using Chai and Mocha in the `test` folder.
-To run the tests, use the following command:
+To run all the tests, use the following command:
 
     npm test
+
+To run the tests for the users database, use the following command:
+
+    npm run test-db
+
+To run the tests for the API endpoints, use the following command:
+
+    npm run test-api
 
 ## Running the Server
 

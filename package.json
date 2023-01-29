@@ -4,7 +4,9 @@
   "description": "api testing",
   "main": "app.js",
   "scripts": {
-    "test": "mocha test/apiTest.js",
+    "test": "mocha",
+    "test-api": "mocha test/apiTest.js",
+    "test-db": "mocha test/test.js",
     "start": "node app.js"
   },
   "repository": {
