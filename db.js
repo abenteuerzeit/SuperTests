@@ -26,7 +26,7 @@ const addUserToDb = (user) => {
       return id;
     };
     if (users.find((u) => u.email === user.email)) {
-      throw new Error("User with this email already exists");
+      return null;
     }
     user.id = generateNewId();
     _userIds.add(user.id);

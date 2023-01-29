@@ -14,7 +14,7 @@ usersRouter.get('/:id', function (req, res, next) {
     if (user) {
         return res.json(user);
     }
-    return res.status(404).json('user not found');
+    return res.status(404).json('User not found');
 });
 
 usersRouter.post('/', function (req, res, next) {
@@ -27,10 +27,13 @@ usersRouter.post('/', function (req, res, next) {
         gender: content.gender,
         phone: content.phone
     });
+    try {
     if (user) {
         return res.status(201).json(user);
     } else {
-        return res.status(400).send('Error adding user to database, this email is already in use');
+      throw new Error('Error adding user to database, this email is already in use');
+    }} catch (err) {
+        return res.status(400).json(err.message);
     }
 });
 
