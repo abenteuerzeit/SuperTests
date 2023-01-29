@@ -14,7 +14,7 @@ Then, install the project dependencies.
 
 ## Users Database
 
-The users database is a simple JSON file located in the `data` folder. It contains a list of users with their name, email and password, and other information.
+The users database is generated in the `db.js` file. This file is used by the server to generate the database. It contains a list of users with their name, email and password, and other information.
 
 Every time the server is restarted, the database is regenerated with different users and dummy data.
 
