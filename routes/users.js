@@ -28,7 +28,7 @@ usersRouter.post('/', function (req, res, next) {
         phone: content.phone
     });
     if (user) {
-        return res.json(user);
+        return res.status(201).json(user);
     } else {
         return res.status(400).send('Error adding user to database, this email is already in use');
     }
