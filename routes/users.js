@@ -30,7 +30,7 @@ usersRouter.post('/', function (req, res, next) {
     if (user) {
         return res.json(user);
     } else {
-        return res.status(500).send('Error adding user to database, this email is already in use');
+        return res.status(400).send('Error adding user to database, this email is already in use');
     }
 });
 
