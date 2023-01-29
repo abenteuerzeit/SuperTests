@@ -1,0 +1,30 @@
+{
+  "name": "supertests",
+  "version": "1.0.0",
+  "description": "api testing",
+  "main": "app.js",
+  "scripts": {
+    "test": "test",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abenteuerzeit/SuperTests.git"
+  },
+  "keywords": [
+    "api",
+    "test",
+    "supertest",
+    "hackernoon",
+    "backend"
+  ],
+  "author": "abenteuerzeit",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abenteuerzeit/SuperTests/issues"
+  },
+  "homepage": "https://github.com/abenteuerzeit/SuperTests#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
