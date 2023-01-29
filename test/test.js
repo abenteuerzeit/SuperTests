@@ -33,7 +33,16 @@ describe('db', () => {
             const emails = users.map(user => user.email);
             assert.equal(new Set(emails).size, emails.length);
         });
-        
+
+        it('does not create emails without a username', () => {
+            users.forEach(user => {
+                const email = user.email;
+                assert.notEqual(email.indexOf('@'), 0);
+                assert.notEqual(email.indexOf('.'), 0);
+                assert.notEqual(email.indexOf(' '), 0);
+            });
+        });
+
         it('generates a unique id for each user', () => {
             const ids = users.map(user => user.id);
             assert.equal(new Set(ids).size, ids.length);

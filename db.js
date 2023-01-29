@@ -122,7 +122,7 @@ class User {
           break;
       }
     }
-    if (usernames.includes(_username)) {
+    if (usernames.includes(_username) || ["", " ", "."].includes(_username)) {
         return this._generateUsername();
         } else {
         usernames.push(_username);
